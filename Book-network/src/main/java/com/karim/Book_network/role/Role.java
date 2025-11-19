@@ -1,8 +1,9 @@
 package com.karim.Book_network.role;
 
 
-import com.Recom.user.User;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.karim.Book_network.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

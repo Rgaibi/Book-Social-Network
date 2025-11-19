@@ -1,6 +1,6 @@
 package com.karim.Book_network.user;
 
-import com.Recom.role.Role;
+import com.karim.Book_network.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -76,7 +76,7 @@ public class User implements UserDetails, Principal {
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 
     @Override
