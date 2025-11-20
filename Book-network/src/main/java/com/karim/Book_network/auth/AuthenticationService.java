@@ -1,6 +1,7 @@
 package com.karim.Book_network.auth;
 
 
+import com.karim.Book_network.email.EmailService;
 import com.karim.Book_network.role.RoleRepository;
 import com.karim.Book_network.user.Token;
 import com.karim.Book_network.user.TokenRepository;
@@ -22,7 +23,7 @@ public class AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
-    peivate final EmailService emailService;
+    private final EmailService emailService;
 
     public void register(RegistrationRequest request) {
         var userRole = roleRepository.findByName("USER")
@@ -66,6 +67,6 @@ public class AuthenticationService {
     }
 
     private void sendValidationEmail(User user) {
-        var
+        var newToken = generateAndSaveActivationToken(user);
     }
 }
