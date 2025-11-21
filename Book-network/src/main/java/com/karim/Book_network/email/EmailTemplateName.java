@@ -2,7 +2,7 @@ package com.karim.Book_network.email;
 
 import lombok.Getter;
 
-
+@Getter
 public enum EmailTemplateName {
     ACTIVATE_ACCOUNT("activate_account");
 

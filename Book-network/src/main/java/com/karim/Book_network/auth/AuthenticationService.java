@@ -2,12 +2,15 @@ package com.karim.Book_network.auth;
 
 
 import com.karim.Book_network.email.EmailService;
+import com.karim.Book_network.email.EmailTemplateName;
 import com.karim.Book_network.role.RoleRepository;
 import com.karim.Book_network.user.Token;
 import com.karim.Book_network.user.TokenRepository;
 import com.karim.Book_network.user.User;
 import com.karim.Book_network.user.UserRepository;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +27,10 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final TokenRepository tokenRepository;
     private final EmailService emailService;
+    @Value("${application.mailing.frontend.activation-url}")
+    private String activationURl;
 
-    public void register(RegistrationRequest request) {
+    public void register(RegistrationRequest request) throws MessagingException {
         var userRole = roleRepository.findByName("USER")
                     .orElseThrow(() -> new IllegalStateException("ROLE USER WAS NOT INITIALIZED"));
 
@@ -66,7 +71,16 @@ public class AuthenticationService {
         return generatedToken;
     }
 
-    private void sendValidationEmail(User user) {
+    private void sendValidationEmail(User user) throws MessagingException {
         var newToken = generateAndSaveActivationToken(user);
+        emailService.sendEmail(
+                user.getEmail(),
+                user.fullName(),
+                EmailTemplateName.ACTIVATE_ACCOUNT,
+                activationURl,
+                newToken,
+                "Account activation"
+        );
+
     }
 }
