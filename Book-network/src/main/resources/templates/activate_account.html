@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your Account</title>
+    <style>
+        body, p, h1, h2, h3, a {
+            margin: 0; padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        body { background-color: #f5f5f5; color: #333; }
+        .email-container { max-width: 600px; margin: 20px auto; background: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .header { background: #4CAF50; color: #fff; text-align: center; padding: 20px; }
+        .content { padding: 20px; }
+        .btn { background: #4CAF50; color: #fff; text-decoration: none; padding: 12px 25px; border-radius: 5px; display: inline-block; font-weight: bold; }
+        .footer { background: #f0f0f0; color: #777; font-size: 12px; text-align: center; padding: 15px; }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="header">
+        <h1>Activate Your Account</h1>
+    </div>
+    <div class="content">
+        <p>Hi <span th:text="${username}">Username</span>,</p>
+        <p>Thank you for registering! Please activate your account using the link below or by entering your activation code.</p>
+
+        <div style="text-align:center; margin:20px 0;">
+            <a th:href="${confirmationUrl}" class="btn">Activate Account</a>
+        </div>
+
+        <p>Your activation code: <strong th:text="${activation_code}"></strong></p>
+        <p>If you did not create an account, please ignore this email.</p>
+    </div>
+    <div class="footer">
+        &copy; 2025 Rgaibi. All rights reserved.
+    </div>
+</div>
+</body>
+</html>
