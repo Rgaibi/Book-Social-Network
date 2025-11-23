@@ -9,6 +9,7 @@ import com.karim.Book_network.user.TokenRepository;
 import com.karim.Book_network.user.User;
 import com.karim.Book_network.user.UserRepository;
 import jakarta.mail.MessagingException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -82,5 +83,9 @@ public class AuthenticationService {
                 "Account activation"
         );
 
+    }
+
+    public AuthenticationResponse authenticate(@Valid AuthenticationRequest request) {
+        return null;
     }
 }
