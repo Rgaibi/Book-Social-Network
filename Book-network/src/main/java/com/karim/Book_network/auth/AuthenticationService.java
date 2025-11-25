@@ -10,7 +10,6 @@ import com.karim.Book_network.user.TokenRepository;
 import com.karim.Book_network.user.User;
 import com.karim.Book_network.user.UserRepository;
 import jakarta.mail.MessagingException;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,7 +33,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final EmailService emailService;
     private final JwtService jwtService;
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     @Value("${application.mailing.frontend.activation-url}")
     private String activationURl;
 
@@ -93,12 +92,12 @@ public class AuthenticationService {
 
     }
 
-    public AuthenticationResponse authenticate(@Valid AuthenticationRequest request) {
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
         var auth = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
         var claims = new HashMap<String, Object>();
-        var user = (User)auth.getPrincipal();
+        var user = ((User)auth.getPrincipal());
         claims.put("fullName", user.fullName());
         var jwtToken = jwtService.generateToken(claims, user);
         return AuthenticationResponse.builder()
