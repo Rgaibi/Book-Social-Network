@@ -36,8 +36,17 @@ public class GlobalExceptionHandler {
                 );
     }
 
-    
-
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleException (BadCredentialsException exp) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(ExceptionResponse.builder()
+                        .businessErrorCode(BusinessErrorCodes.BAD_CREDENTIALS.getCode())
+                        .businessErrorDescription(BusinessErrorCodes.BAD_CREDENTIALS.getDescription())
+                        .error(BusinessErrorCodes.BAD_CREDENTIALS.getDescription())
+                        .build()
+                );
+    }
 
 
 }
