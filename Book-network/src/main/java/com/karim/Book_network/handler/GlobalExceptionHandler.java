@@ -19,6 +19,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(LockedException.class)
     public ResponseEntity<ExceptionResponse> handleException (LockedException exp) {
+        exp.printStackTrace();
         return ResponseEntity
                 .status(HttpStatus.UNAUTHORIZED)
                 .body(ExceptionResponse.builder()
@@ -75,6 +76,17 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(ExceptionResponse.builder()
                         .validationErrors(errors)
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleException (Exception exp) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ExceptionResponse.builder()
+                        .businessErrorDescription("Internal error, contact the admin ")
+                        .error(exp.getMessage())
                         .build()
                 );
     }
