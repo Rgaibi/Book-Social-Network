@@ -1,5 +1,6 @@
 package com.karim.Book_network.handler;
 
+import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -44,6 +45,16 @@ public class GlobalExceptionHandler {
                         .businessErrorCode(BusinessErrorCodes.BAD_CREDENTIALS.getCode())
                         .businessErrorDescription(BusinessErrorCodes.BAD_CREDENTIALS.getDescription())
                         .error(BusinessErrorCodes.BAD_CREDENTIALS.getDescription())
+                        .build()
+                );
+    }
+
+    @ExceptionHandler(MessagingException.class)
+    public ResponseEntity<ExceptionResponse> handleException (MessagingException exp) {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ExceptionResponse.builder()
+                        .error(exp.getMessage())
                         .build()
                 );
     }
