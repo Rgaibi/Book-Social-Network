@@ -1,5 +1,7 @@
 package com.karim.Book_network.user;
 
+import com.karim.Book_network.book.Book;
+import com.karim.Book_network.history.BookTransactionHistory;
 import com.karim.Book_network.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,6 +49,12 @@ public class User implements UserDetails, Principal {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Book> books;
+
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
 
 
     @CreatedDate
