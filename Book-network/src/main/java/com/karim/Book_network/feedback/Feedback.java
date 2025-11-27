@@ -1,5 +1,4 @@
-package com.karim.Book_network.book;
-
+package com.karim.Book_network.feedback;
 
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -12,22 +11,14 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class Book {
+public class Feedback {
     @Id
     @GeneratedValue
     private Integer id;
 
-    private String tittle;
+    private Double note;
 
-    private String authorName;
-
-    private String isbn;
-
-    private String bookCover;
-
-    private boolean archived;
-
-    private boolean shearable;
+    private  String comment;
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
