@@ -37,7 +37,7 @@ public class BeansConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
-    
+
     @Bean
     public AuditorAware<String> auditorAware() {
         return new ApplicationAuditorAware();
