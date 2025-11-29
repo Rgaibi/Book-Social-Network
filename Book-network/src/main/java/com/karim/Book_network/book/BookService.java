@@ -19,4 +19,8 @@ public class BookService {
         return bookRepository.save(book).getId();
     }
 
+    public BookResponse findByid(Integer bookId) {
+
+    }
+
 }
