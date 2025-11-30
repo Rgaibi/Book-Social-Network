@@ -1,5 +1,6 @@
 package com.karim.Book_network.book;
 
+import com.karim.Book_network.common.PageResponse;
 import com.karim.Book_network.user.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,10 @@ public class BookService {
         return bookRepository.findById(bookId)
                 .map(bookMapper::toBookResponse)
                 .orElseThrow(() -> new EntityNotFoundException("No book found  with the ID: " + bookId));
+    }
+
+    public PageResponse<BookResponse> findAllBooks(int page, int size, Authentication connectedUser) {
+
     }
 
 }
