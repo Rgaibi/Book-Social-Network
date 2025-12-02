@@ -4,6 +4,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface BookTransactionRepository extends JpaRepository<BookTransactionHistory, Integer> {
 
@@ -12,15 +13,25 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
         FROM BookTransactionHistory 
         WHERE user_id = :userId
         """, nativeQuery = true)
-    Page<BookTransactionHistory> findAllBorrowedBooks(Integer id, Pageable pageable);
+    Page<BookTransactionHistory> findAllBorrowedBooks(@Param("userId") Integer id, Pageable pageable);
 
 
     @Query(value = """
         SELECT h.*
-        FROM book_transaction_history h
+        FROM bookTransactionHistory h
         JOIN book b ON h.book_id = b.id
         WHERE b.owner_id = :userId
             AND h.returned = true;
         """, nativeQuery = true)
-    Page<BookTransactionHistory>findAllReturnedBooks (Integer id, Pageable pageable);
+    Page<BookTransactionHistory>findAllReturnedBooks (@Param("userId") Integer id, Pageable pageable);
+
+    @Query(value = """
+        SELECT 
+        COUNT(*) > 0 isBorrowed
+        FROM bookTransactionHistory
+        WHERE user_id = :userId
+            AND book_id = :bookId
+            AND returnedApproved = false;
+        """, nativeQuery = true)
+    boolean isAlreadyBorrowed(@Param("bookId")Integer bookId, @Param("userId") Integer userId);
 }
