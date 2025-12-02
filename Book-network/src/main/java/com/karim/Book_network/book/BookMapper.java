@@ -1,5 +1,6 @@
 package com.karim.Book_network.book;
 
+import com.karim.Book_network.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,6 +26,19 @@ public class BookMapper {
                 .rate(book.getRate())
                 .archived(book.isArchived())
                 .owner(book.getOwner().fullName())
+                .build();
+    }
+
+    public BorrowedBookResponse toBorrowedBookResponse(BookTransactionHistory bookTransactionHistory) {
+
+        return BorrowedBookResponse.builder()
+                .id(bookTransactionHistory.getBook().getId())
+                .title(bookTransactionHistory.getBook().getTittle())
+                .authorName(bookTransactionHistory.getBook().getAuthorName())
+                .isbn(bookTransactionHistory.getBook().getIsbn())
+                .rate(bookTransactionHistory.getBook().getRate())
+                .returned(bookTransactionHistory.isReturned())
+                .returnApproved(bookTransactionHistory.isReturnApproved())
                 .build();
     }
 }
