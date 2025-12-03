@@ -12,7 +12,7 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
     @Query(value = """
         SELECT *
-        FROM BookTransactionHistory 
+        FROM book_transaction_history 
         WHERE user_id = :userId
         """, nativeQuery = true)
     Page<BookTransactionHistory> findAllBorrowedBooks(@Param("userId") Integer id, Pageable pageable);
@@ -20,7 +20,7 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
     @Query(value = """
         SELECT h.*
-        FROM bookTransactionHistory h
+        FROM book_transaction_history h
         JOIN book b ON h.book_id = b.id
         WHERE b.owner_id = :userId
             AND h.returned = true;
@@ -30,7 +30,7 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
     @Query(value = """
         SELECT 
         COUNT(*) > 0 isBorrowed
-        FROM bookTransactionHistory
+        FROM book_transaction_history
         WHERE user_id = :userId
             AND book_id = :bookId
             AND returnApproved = false;
@@ -39,11 +39,22 @@ public interface BookTransactionRepository extends JpaRepository<BookTransaction
 
     @Query(value = """
         SELECT *
-        FROM bookTransactionHistory
+        FROM book_transaction_history
         WHERE user_id = :userId
             AND book_id = :bookId
             AND returned = false;
             AND returnApproved = false;
         """, nativeQuery = true)
-    Optional<BookTransactionHistory> findIfUserBorrowedThisBook(Integer bookId, Integer id);
+    Optional<BookTransactionHistory> findIfUserBorrowedThisBook(@Param("bookId")Integer bookId, @Param("userId")Integer userId);
+
+    @Query(value = """
+        SELECT h.*
+        FROM book_transaction_history h
+        JOIN book b ON h.book_id = b.id
+        WHERE owner_id = :userId
+            AND book_id = :bookId
+            AND returned = true;
+            AND returnApproved = false;
+        """, nativeQuery = true)
+    Optional<BookTransactionHistory> findIfUserIsOwnerOfBorrowedBook(Integer bookId, Integer userId);
 }
