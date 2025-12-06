@@ -2,6 +2,7 @@ package com.karim.Book_network.book;
 
 import com.karim.Book_network.common.PageResponse;
 import com.karim.Book_network.exception.OperationNotPermittedException;
+import com.karim.Book_network.file.FileStorageService;
 import com.karim.Book_network.history.BookTransactionHistory;
 import com.karim.Book_network.history.BookTransactionRepository;
 import com.karim.Book_network.user.User;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Objects;
@@ -24,6 +26,7 @@ public class BookService {
     private  final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final BookTransactionRepository bookTransactionRepository;
+    private final FileStorageService fileStorageService;
 
     public Integer save(BookRequest request, Authentication connectedUser) {
         User user = (User) connectedUser.getPrincipal();
@@ -197,5 +200,15 @@ public class BookService {
                 .orElseThrow(() -> new OperationNotPermittedException("the book is not returned yet"));
         bookTransactionHistory.setReturnApproved(true);
         return bookTransactionRepository.save(bookTransactionHistory).getId();
+    }
+
+    public void uploadBookCoverPicture(MultipartFile file, Authentication connectedUser, Integer bookId) {
+
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new EntityNotFoundException("No book found with the id : " + bookId));
+        User user = (User) connectedUser.getPrincipal();
+        var bookCover = fileStorageService.saveFile(file, user.getId());
+        book.setBookCover(bookCover);
+        bookRepository.save(book);
     }
 }
