@@ -1,5 +1,6 @@
 package com.karim.Book_network.book;
 
+import com.karim.Book_network.file.MyFileUtils;
 import com.karim.Book_network.history.BookTransactionHistory;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ public class BookMapper {
                 .rate(book.getRate())
                 .archived(book.isArchived())
                 .owner(book.getOwner().fullName())
+                .cover(MyFileUtils.readFileFromLocation(book.getBookCover()))
                 .build();
     }
 
