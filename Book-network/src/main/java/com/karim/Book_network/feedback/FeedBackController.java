@@ -21,6 +21,6 @@ public class FeedBackController {
     @PostMapping
     public ResponseEntity<Integer> saveFeedback(@Valid @RequestBody FeedbackRequest request, Authentication connectedUser) {
 
-        return  ResponseEntity.ok(service.save(request, connectedUser))
+        return  ResponseEntity.ok(service.save(request, connectedUser));
     }
 }
