@@ -29,15 +29,16 @@ export class LoginComponent {
     this.errorMsg = [];
     
     
-      this.authService.authenticate({ body: this.authRequest })
-        .then((response) => {
-          //save token;
+      this.authService.authenticate({ body: this.authRequest }).subscribe({
+        next: (response) => {
+          //todo : store token
           this.router.navigate(['/books']);
-        })
-        .catch((err) => {
+        },
+        error: (err) => {
           console.log(err);
-        })
-        
+        }
+      })
+  
 
   }
 }
