@@ -1,0 +1,109 @@
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+    font-size: 1.8rem;
+
+    i {
+      margin-right: 8px;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+
+      label {
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.2s;
+
+        &:focus {
+          border-color: #3498db;
+          outline: none;
+        }
+      }
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      button {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+
+        i {
+          margin-right: 5px;
+        }
+
+        &#loginBtn {
+          background-color: #3498db;
+          color: #fff;
+
+          &:hover {
+            background-color: #2980b9;
+          }
+        }
+
+        &#signupBtn {
+          background-color: #ecf0f1;
+          color: #2c3e50;
+          margin-left: 10px;
+
+          &:hover {
+            background-color: #dfe4ea;
+          }
+        }
+      }
+    }
+
+    .error-box {
+      margin-top: 15px;
+
+      .error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 8px 10px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: center;
+
+        i {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

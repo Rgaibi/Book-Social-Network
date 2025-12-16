@@ -1,0 +1,46 @@
+<div class="auth-container">
+  <h2>Login or Sign Up</h2>
+
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <!-- Email field -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" name="email" placeholder="Enter your email" required [(ngModel)]="registerRequest.email" />
+    </div>
+
+    <!-- firstname field -->
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required [(ngModel)]="registerRequest.firstname" />
+    </div>
+    
+    <!-- lastname field -->
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required [(ngModel)]="registerRequest.lastname" />
+    </div>
+    
+    <!-- Password field -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required [(ngModel)]="registerRequest.password" />
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-group">
+      <button type="submit" id="signupBtn">
+        <i class="fa-solid fa-user-plus"></i> Register
+      </button>
+      <button type="button" id="loginBtn" (click)="login()">
+        <i class="fa-solid fa-right-to-bracket"></i> Login
+      </button>
+    </div>
+
+    <!-- Error messages -->
+    <div class="error-box" *ngIf="errorMsg.length">
+      <div class="error-message" *ngFor="let msg of errorMsg">
+        <i class="fa-solid fa-circle-exclamation"></i> {{ msg }}
+      </div>
+    </div>
+  </form>
+</div>
