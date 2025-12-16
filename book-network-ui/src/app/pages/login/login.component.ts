@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationRequest } from 'src/app/api/models';
 import { AuthenticationService } from 'src/app/api/services';
+import { TokenService } from 'src/app/api/token/token.service';
 
 
 @Component({
@@ -18,6 +19,8 @@ export class LoginComponent {
 
   private router = inject(Router);
   private authService = inject(AuthenticationService)
+  private tokenService = inject(TokenService);
+
 
   register() {
 
@@ -31,7 +34,7 @@ export class LoginComponent {
     
     this.authService.authenticate({ body: this.authRequest }).subscribe({
         next: (response) => {
-          //todo : store token
+          this.tokenService.token = response.token as string;
           this.router.navigate(['/books']);
         },
         error: (err) => {
