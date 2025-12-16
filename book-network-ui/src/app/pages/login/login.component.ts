@@ -26,16 +26,21 @@ export class LoginComponent {
   }
 
   login(form: NgForm) {
+
     this.errorMsg = [];
     
-    
-      this.authService.authenticate({ body: this.authRequest }).subscribe({
+    this.authService.authenticate({ body: this.authRequest }).subscribe({
         next: (response) => {
           //todo : store token
           this.router.navigate(['/books']);
         },
         error: (err) => {
           console.log(err);
+          if(err.error.validationErrors){
+            this.errorMsg = err.error.validationErrors;
+          }else{
+            this.errorMsg.push(err.error.error);
+          }
         }
       })
   
