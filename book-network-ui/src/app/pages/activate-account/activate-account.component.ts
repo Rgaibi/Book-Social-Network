@@ -18,9 +18,25 @@ export class ActivateAccountComponent {
   private router = inject(Router);
   private authService = inject(AuthenticationService);
 
-  onCodeCompleted($event: string) {
+  confirmAccount(token: string) {
+    this.authService.confirm({ token: token }).subscribe({
+      next: () => {
+        this.message = 'your account has been successfully activated. You can now log in.';
+        this.submitted = true;
+      },
+      error: (err) => {
+        this.message = 'Token is invalid or expired.';
+        this.submitted = false;
+        this.isOk = false;
+      }
 
+    })
   }
+
+  onCodeCompleted(token: string) {
+    this.confirmAccount(token);
+  }
+  
 
   redirectToLogin() {
     this.router.navigate(['/login']);
