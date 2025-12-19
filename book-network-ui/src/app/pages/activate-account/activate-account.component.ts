@@ -23,14 +23,15 @@ export class ActivateAccountComponent {
       next: () => {
         this.message = 'your account has been successfully activated. You can now log in.';
         this.submitted = true;
+        this.isOk = true;
       },
       error: (err) => {
         this.message = 'Token is invalid or expired.';
-        this.submitted = false;
+        this.submitted = true;
         this.isOk = false;
       }
 
-    })
+    });
   }
 
   onCodeCompleted(token: string) {

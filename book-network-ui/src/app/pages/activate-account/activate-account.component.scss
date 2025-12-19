@@ -1,0 +1,67 @@
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  text-align: center;
+
+  h2 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+  }
+}
+
+.activate-message {
+  h2 { color: #4CAF50; }
+  button { background: #4CAF50; color: white; }
+}
+
+.activate-error {
+  h2 { color: #f44336; }
+  p { color: #f44336; }
+  button { background: #f44336; color: white; }
+}
+
+code-input {
+  margin: 20px 0;
+  ::ng-deep .ngx-code-input {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    input {
+      width: 40px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      &:focus { border-color: #4CAF50; outline: none; }
+    }
+  }
+}
