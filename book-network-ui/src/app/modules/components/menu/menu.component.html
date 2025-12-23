@@ -1,0 +1,65 @@
+<nav class="menu-navbar">
+  <!-- 1. Identité de l'application -->
+  <div class="menu-brand">
+    <a routerLink="/" class="brand-link">
+      <i class="fas fa-book"></i>
+      <span>BSN</span>
+    </a>
+  </div>
+
+  <!-- 2. Navigation principale -->
+  <ul class="menu-nav">
+    <li class="menu-nav-item">
+      <a routerLink="/books" class="menu-nav-link">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+    </li>
+    <li class="menu-nav-item">
+      <a routerLink="/my-books" class="menu-nav-link">
+        <i class="fas fa-book-open"></i>
+        <span>My books</span>
+      </a>
+    </li>
+    <li class="menu-nav-item">
+      <a routerLink="/waiting-list" class="menu-nav-link">
+        <i class="fas fa-hourglass-half"></i>
+        <span>Waiting list</span>
+      </a>
+    </li>
+    <li class="menu-nav-item">
+      <a routerLink="/borrowed" class="menu-nav-link">
+        <i class="fas fa-arrow-circle-left"></i>
+        <span>Borrowed books</span>
+      </a>
+    </li>
+    <li class="menu-nav-item">
+      <a routerLink="/returned" class="menu-nav-link">
+        <i class="fas fa-undo"></i>
+        <span>Returned books</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- 3. Outils / actions -->
+  <div class="menu-actions">
+    <form (ngSubmit)="search()" class="search-form">
+      <input type="search" placeholder="Find a book" class="search-input">
+      <button type="submit" class="search-btn">
+        <i class="fas fa-search"></i>
+      </button>
+    </form>
+
+    <button (click)="logout()" class="logout-btn">
+      <i class="fas fa-sign-out-alt"></i>
+      <span>Logout</span>
+    </button>
+  </div>
+
+  <!-- 4. État utilisateur -->
+  <div class="menu-user">
+    <i class="fas fa-user-circle"></i>
+    <span class="user-welcome">Welcome</span>
+    <strong class="user-name">karim</strong>
+  </div>
+</nav>
