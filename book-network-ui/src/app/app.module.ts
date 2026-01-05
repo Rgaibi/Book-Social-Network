@@ -11,6 +11,7 @@ import { ActivateAccountComponent } from './pages/activate-account/activate-acco
 import { CodeInputModule } from 'angular-code-input';
 import { MainComponent } from './modules/pages/main/main.component';
 import { MenuComponent } from './modules/components/menu/menu.component';
+import { BookListComponent } from './modules/pages/book-list/book-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MenuComponent } from './modules/components/menu/menu.component';
     RegisterComponent,
     ActivateAccountComponent,
     MainComponent,
-    MenuComponent
+    MenuComponent,
+    BookListComponent
   ],
   imports: [
     BrowserModule,
